@@ -132,7 +132,7 @@ func (fb *Firebase) URL() string {
 }
 
 // Push creates a reference to an auto-generated child location.
-func (fb *Firebase) Push(v interface{}) (*Firebase, error) {
+func (fb *Firebase) Push(v interface{}) (*Firebase,key string, error) {
 	bytes, err := json.Marshal(v)
 	if err != nil {
 		return nil, err
@@ -147,7 +147,7 @@ func (fb *Firebase) Push(v interface{}) (*Firebase, error) {
 	}
 	newRef := fb.copy()
 	newRef.url = fb.url + "/" + m["name"]
-	return newRef, err
+	return newRef, m["name"], err
 }
 
 // Remove the Firebase reference from the cloud.
