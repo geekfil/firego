@@ -135,15 +135,15 @@ func (fb *Firebase) URL() string {
 func (fb *Firebase) Push(v interface{}) (*Firebase, string, error) {
 	bytes, err := json.Marshal(v)
 	if err != nil {
-		return nil, err
+		return nil, "", err
 	}
 	_, bytes, err = fb.doRequest("POST", bytes)
 	if err != nil {
-		return nil, err
+		return nil, "", err
 	}
 	var m map[string]string
 	if err := json.Unmarshal(bytes, &m); err != nil {
-		return nil, err
+		return nil, "", err
 	}
 	newRef := fb.copy()
 	newRef.url = fb.url + "/" + m["name"]
