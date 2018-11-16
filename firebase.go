@@ -132,7 +132,7 @@ func (fb *Firebase) URL() string {
 }
 
 // Push creates a reference to an auto-generated child location.
-func (fb *Firebase) Push(v interface{}) (*Firebase,key string, error) {
+func (fb *Firebase) Push(v interface{}) (*Firebase, string, error) {
 	bytes, err := json.Marshal(v)
 	if err != nil {
 		return nil, err
